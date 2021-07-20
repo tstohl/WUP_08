@@ -57,3 +57,20 @@ Based on these results, this model is clearly the favorable.
 
 
 
+Next, I will use the variable HEADWTH to create a model. Let's see how effective this one will be. 
+
+
+
+
+```{r}
+modheadw <- lm(LENGTH~HEADWTH,data=bears)
+plot(LENGTH~CHEST,data=bears)
+abline(modheadw)
+summary.lm(modheadw)
+```
+
+
+This model, modheadw, appears to be completely ineffective. The residual standard error in this model is 7.32, which is considerably large in comparison to both of the previous models simp and modchest. These numbers were 5 and 5.4. The adjusted R-squared in this model is only 0.53, whereas the first to models were 0.74 and 0.78. 
+
+
+
