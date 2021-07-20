@@ -24,6 +24,13 @@ abline(simp)
 summary.lm(simp)
 ```
 
+
+The details to look at in this bunch of information is the residual standard error and the adjusted R-squared. The smaller the residual standard error and the larger the adjusted R-squared, the more effective the model. This model using the variable NECK appears to have a residual standard error of approximately 5.4 while the adjusted R squared is at 0.74. In other words the error was corrected by 74%.
+
+
+Lets see if more effective models can be made using other variables. 
+
+
 ## now predict the length of a bear who has a neck of 17, 22 and 26
 
 
@@ -33,4 +40,20 @@ predict(simp,new)
 predict(simp,new,se.fit=TRUE)
 ```
 ## Surely there is another variable that can better predict LENGTH than NECK. Find one and compare its performance to that of neck by it value of Adjusted-Rsquared (bigger is better).
+
+
+First, I will model the length of a bear based on chest size to see if it produces a more effective model.
+
+
+```{r}
+modchest <- lm(LENGTH~CHEST,data=bears)
+plot(LENGTH~CHEST,data=bears)
+abline(modchest)
+summary.lm(modchest)
+```
+
+This model is more effective than the previous as the residual standard error is smaller and the Adjusted R-squared is larger. The smaller the residual standard error the less error present. The larger the adjusted R-squared the more errors are corrected. The residual standard error in this model, modchest, is approximately 5 and the adjusted R-squared is at 0.78. The previous model titled simp had a residual standard error of approximately 5.4 and the adjusted R-squared was 0.74.
+Based on these results, this model is clearly the favorable.
+
+
 
