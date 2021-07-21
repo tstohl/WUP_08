@@ -2,9 +2,12 @@
 title: "simpleRegress"
 author: "Taylor Stohl"
 date: "Summer 2021"
-output: html_document
+output:
+   html_document:
+         toc: true
+         toc_depth: 5
+        
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -42,7 +45,17 @@ predict(simp,new,se.fit=TRUE)
 ## Surely there is another variable that can better predict LENGTH than NECK. Find one and compare its performance to that of neck by it value of Adjusted-Rsquared (bigger is better).
 
 
+
+
+
+# Model LENGTH~CHEST
+
 First, I will model the length of a bear based on chest size to see if it produces a more effective model.
+
+
+
+
+
 
 
 ```{r}
@@ -60,11 +73,12 @@ Based on these results, this model is clearly the favorable.
 Next, I will use the variable HEADWTH to create a model. Let's see how effective this one will be. 
 
 
+# Model LENGTH~HEADWDTH
 
 
 ```{r}
 modheadw <- lm(LENGTH~HEADWTH,data=bears)
-plot(LENGTH~CHEST,data=bears)
+plot(LENGTH~HEADWTH,data=bears)
 abline(modheadw)
 summary.lm(modheadw)
 ```
@@ -73,4 +87,34 @@ summary.lm(modheadw)
 This model, modheadw, appears to be completely ineffective. The residual standard error in this model is 7.32, which is considerably large in comparison to both of the previous models simp and modchest. These numbers were 5 and 5.4. The adjusted R-squared in this model is only 0.53, whereas the first to models were 0.74 and 0.78. 
 
 
+# Model LENGTH~HEADLEN
+
+```{r}
+modheadl <- lm(LENGTH~HEADLEN,data=bears)
+plot(LENGTH~HEADLEN,data=bears)
+abline(modheadl)
+summary.lm(modheadl)
+```
+
+
+
+This model, modheadl, is the best model of all 4. This model has a residual standard error of only 4.23 and an adjusted R-squared of 0.84. That's 84% of errors were corrected. 
+
+
+
+# Conclusion 
+
+
+
+
+The best model was the model, modheadl and compared LENGTH to HEADLEN.
+This model has a residual standard error of only 4.23 and an adjusted R-squared of 0.84.
+The second best model was modchest, LENGTH~CHEST, as the residual standard error in this model is approximately 5 and the adjusted R-squared is at 0.78.
+
+The Third best model was LENGTH~NECK; simp. It illustrates a residual standard error of approximately 5.4 while the adjusted R squared is at 0.74.
+
+The least effective model is modheadw, LENGTH~HEADWTH, and its The residual standard error in this model is 7.32 and the adjusted R-squared is only 0.
+
+
+The two variables that out shined NECK were CHEST and HEADLEN. 
 
